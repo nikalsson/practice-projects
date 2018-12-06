@@ -1,0 +1,19 @@
+.gameboard {
+    background-color: green;
+    height: 400px;
+    display: grid;
+
+}
+
+
+#player-hand {
+    background-color: grey;
+    width: 150px;
+    height: 50%;
+    text-align: center;
+
+}
+
+.darkBG {
+    background-color: grey;
+}
