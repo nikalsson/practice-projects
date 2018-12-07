@@ -1,19 +1,67 @@
-.gameboard {
-    background-color: green;
-    height: 400px;
-    display: grid;
-
+body {
+    font-family: tahoma;
 }
 
-
-#player-hand {
-    background-color: grey;
-    width: 150px;
-    height: 50%;
+h1 {
     text-align: center;
-
 }
 
-.darkBG {
-    background-color: grey;
+.buttons {
+    padding-top: 20px;
+    margin: auto;
+    text-align: center;
+}
+
+.buttons button {
+    margin-left: 20px;
+}
+
+.scoreboard {
+    background-color: #FFFFFF;
+    height: 100px;
+    display: grid;
+    width: 500px;
+    margin: auto;
+}
+
+
+.player-hand {
+    background-color: #027a01;
+    width: 100%;
+    height: 250px;
+    text-align: center;
+}
+
+.card {
+    background-color: white;
+    border-radius: 10px;
+    border: solid 2px #000;
+    text-align: center;
+    width: 120px;
+    height: 175px;
+    line-height: 170px;
+    display: inline-block;
+    margin-top: 40px;
+    font-size: 11rem;
+}
+
+.red {
+    color: #db061b;
+}
+
+#card-count {
+    margin-left: 20px;
+    text-align: right;
+}
+
+#player-turn {
+    text-align: center;
+}
+
+#player0-name {
+    text-align: center;
+}
+
+#player1-name {
+    text-align: center;
 }
