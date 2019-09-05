@@ -1,0 +1,27 @@
+{
+  "name": "projekt_api1",
+  "version": "1.0.0",
+  "description": "Pierwsze API zomg",
+  "main": "index.js",
+  "scripts": {
+    "start": "node main.js",
+    "test": "jest",
+    "demon": "nodemon main.js"
+  },
+  "author": "Oskar Szymański",
+  "license": "ISC",
+  "devDependencies": {
+    "jest": "^24.8.0",
+    "nodemon": "^1.19.1"
+  },
+  "dependencies": {
+    "archiver": "^3.0.3",
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "csv-writer": "^1.5.0",
+    "express": "^4.17.1",
+    "pg": "^7.11.0",
+    "rimraf": "^2.6.3",
+    "uuid": "^3.3.2"
+  }
+}
