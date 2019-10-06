@@ -1,0 +1,70 @@
+.wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
+  transition: all 0.4s;
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman';
+}
+
+#quote-box {
+  width: 40vw;
+  min-width: 500px;
+  padding: 35px;
+  border-radius: 5px;
+  background-color: #FFFFFF;
+}
+
+#text {
+  display: flex;
+  flex-wrap: wrap;
+  font-size: 2.2em;
+  font-weight: 200;
+  opacity: 1.0;
+  transition: all 0.4s;
+}
+
+#author {
+  font-size: 1.2em;
+  text-align: end;
+  font-style: italic;
+  opacity: 0.7;
+  transition: all 0.4s;
+}
+
+#button-bar {
+  padding-top: 15px;
+  display: flex;
+  justify-content: space-between
+}
+
+#tweet-quote {
+  font-size: 2.5em;
+  color: rgba(204, 30, 30, 0.123)
+}
+
+/* Override default HTML button styling */
+button {
+  border: 0;
+  border-radius: 3px;
+  padding: 0px 8px;
+  font-size: 1em;
+  color: #00000060
+}
+
+button:hover {
+  cursor: pointer;
+  opacity: 0.7;
+  transition: all 0.4s;
+}
+
+button:disabled {
+  opacity: 0.2;
+  cursor: default;
+  transition: all 0.4s;
+}
+
+button:active {
+  transform: skewX(0.5)
+}
