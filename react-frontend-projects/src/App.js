@@ -5,13 +5,19 @@ import { ModeSelectorButtons, ReturnButton } from './views/modeSelector'
 import MarkdownPreviewer from './views/markdownPreviewer'
 import Calculator from './views/calculatorLogic'
 import QuoteMachine from './views/randomQuoteMachine'
+import DrumMachine from './views/drumMachine'
 
 class App extends React.PureComponent {
   state = {
     modePickerVisible: true,
     markdownPreviewerSelected: false,
     calculatorSelected: false,
-    randomQuoteMachineSelected: false
+    randomQuoteMachineSelected: false,
+    drumMachineSelected: false
+  }
+
+  componentDidMount() {
+    window.focus()
   }
 
   changeView = (event) => {
@@ -26,7 +32,10 @@ class App extends React.PureComponent {
         break;
       case "quoteMachine":
         selectionObject.randomQuoteMachineSelected = true
-      break;
+        break;
+      case "drumMachine":
+        selectionObject.drumMachineSelected = true
+        break;
       default: 
         selectionObject = ""
     }
@@ -38,7 +47,8 @@ class App extends React.PureComponent {
       modePickerVisible: true,
       markdownPreviewerSelected: false,
       calculatorSelected: false,
-      randomQuoteMachineSelected: false
+      randomQuoteMachineSelected: false,
+      drumMachineSelected: false
     })
   }
 
@@ -63,11 +73,17 @@ class App extends React.PureComponent {
           </React.Fragment>
         }
 
-        
         {this.state.randomQuoteMachineSelected && 
           <React.Fragment>
             <ReturnButton backToModeSelector={ this.backToModeSelector }/>
             <QuoteMachine/>
+          </React.Fragment>
+        }
+        
+        {this.state.drumMachineSelected && 
+          <React.Fragment>
+            <ReturnButton backToModeSelector={ this.backToModeSelector }/>
+            <DrumMachine/>
           </React.Fragment>
         }
         

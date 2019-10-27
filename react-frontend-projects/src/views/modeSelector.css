@@ -1,32 +1,37 @@
-#description {
+.description {
+  text-align: center;
+  padding: 20px;
+}
+
+.show-grid {
+  height: 100%;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+}
+
+.show-grid .row {
+  height: 33.333vh;
+  margin: 0;
+}
+
+.show-grid .row .col {
+  padding: 0;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 }
 
-#description p {
-  padding: 20px;
-  text-align: justify
-}
-
-.show-grid {
-  height: 100%;
-}
-.show-grid .row {
-  height: 33.3vh
-}
-.show-grid .row .col {
-  padding: 0;
-}
 .row .col .btn-block {
   width: 100%;
   height: 100%;
   border-radius: 0;
 }
+
 .return-button {
+  position: absolute;
   opacity: 0.8;
   border-radius: 0;
-  padding: 10px;
-  height: 100%;
+  height: 40px;
 }

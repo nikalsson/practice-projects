@@ -11,8 +11,8 @@ export const ModeSelectorButtons = (props) => (
     <div className="show-grid">
       {/* Screen divided to three equal rows and two columns */}
       <Row>
-        <Col id="description">
-          <p>freeCodeCamp Front end projects made using React, Font-Awesome, Marked.js and Styled Components</p>
+        <Col>
+          <p className="description">freeCodeCamp Front end projects made using React, Font-Awesome, Marked.js and Styled Components</p>
         </Col>
         <Col>
           <Button onClick={props.changeView} block variant="info" id="quoteMachine">Random Quote Machine</Button>
@@ -28,7 +28,7 @@ export const ModeSelectorButtons = (props) => (
       </Row>
       <Row>
         <Col>
-          <Button onClick={props.changeView} block variant="success" disabled>Here will be a drum machine</Button>
+          <Button onClick={props.changeView} block variant="success" id="drumMachine">Drum Machine - improved version does not pass FCC tests anymore, but is shorter in code and does all the same things          </Button>
         </Col>
         <Col>
           <Button onClick={props.changeView} block variant="primary" disabled>Here will be a pomodoro clock</Button>

@@ -21,10 +21,6 @@ class QuoteMachine extends React.PureComponent {
     this.quotePicker();
   }
 
-  componentWillUnmount() {
-    this.quotePicker();
-  }
-
   RGBGenerator = () => {
     // Generate RGB values between 150 and 255, attempt to create pastel colors
     let RGBValueHolder = []
@@ -50,7 +46,7 @@ class QuoteMachine extends React.PureComponent {
   fetchQuote = async() => {
     try {
       // Use this proxy to bypass CORS because this is a simple single-page application
-      let url = "https://bypasscors.herokuapp.com/api/?url=" + encodeURIComponent("https://api.forismatic.com/api/1.0/?method=getQuote&lang=en&format=json");
+      let url = "https://cors-anywhere.herokuapp.com/https://api.forismatic.com/api/1.0/?method=getQuote&lang=en&format=json";
       // let url = "https://api.forismatic.com/api/1.0/?method=getQuote&lang=en&format=json" 
       const fetchedData = await fetch(url, {mode: "cors", dataType: "jsonp"})
       const fetchedDataInJSON = await fetchedData.json() // To extract the JSON body content from the response, use the json() method
