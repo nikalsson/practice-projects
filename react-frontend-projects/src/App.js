@@ -6,14 +6,16 @@ import MarkdownPreviewer from './views/markdownPreviewer'
 import Calculator from './views/calculatorLogic'
 import QuoteMachine from './views/randomQuoteMachine'
 import DrumMachine from './views/drumMachine'
+import PomodoroClock from './views/pomodoroClock'
 
 class App extends React.PureComponent {
   state = {
-    modePickerVisible: true,
+    modePickerVisible: false,
     markdownPreviewerSelected: false,
     calculatorSelected: false,
     randomQuoteMachineSelected: false,
-    drumMachineSelected: false
+    drumMachineSelected: false,
+    pomodoroClockSelected: true
   }
 
   componentDidMount() {
@@ -36,6 +38,9 @@ class App extends React.PureComponent {
       case "drumMachine":
         selectionObject.drumMachineSelected = true
         break;
+      case "pomodoroClock":
+        selectionObject.pomodoroClockSelected = true
+        break;
       default: 
         selectionObject = ""
     }
@@ -48,42 +53,57 @@ class App extends React.PureComponent {
       markdownPreviewerSelected: false,
       calculatorSelected: false,
       randomQuoteMachineSelected: false,
-      drumMachineSelected: false
+      drumMachineSelected: false,
+      pomodoroClockSelected: false
+
     })
   }
 
   render() {
     return (
       <React.Fragment>
-        {this.state.modePickerVisible && 
+        {
+          this.state.modePickerVisible && 
           <ModeSelectorButtons changeView = { this.changeView }/>
         }
 
-        {this.state.markdownPreviewerSelected && 
+        {
+          this.state.markdownPreviewerSelected && 
           <React.Fragment>
             <ReturnButton backToModeSelector={ this.backToModeSelector }/>
             <MarkdownPreviewer/>
           </React.Fragment>
         }
 
-        {this.state.calculatorSelected && 
+        {
+          this.state.calculatorSelected && 
           <React.Fragment>
             <ReturnButton backToModeSelector={ this.backToModeSelector }/>
             <Calculator/>
           </React.Fragment>
         }
 
-        {this.state.randomQuoteMachineSelected && 
+        {
+          this.state.randomQuoteMachineSelected && 
           <React.Fragment>
             <ReturnButton backToModeSelector={ this.backToModeSelector }/>
             <QuoteMachine/>
           </React.Fragment>
         }
         
-        {this.state.drumMachineSelected && 
+        {
+          this.state.drumMachineSelected && 
           <React.Fragment>
             <ReturnButton backToModeSelector={ this.backToModeSelector }/>
             <DrumMachine/>
+          </React.Fragment>
+        }
+
+        {
+          this.state.pomodoroClockSelected && 
+          <React.Fragment>
+            <ReturnButton backToModeSelector={ this.backToModeSelector }/>
+            <PomodoroClock/>
           </React.Fragment>
         }
         
