@@ -120,6 +120,7 @@ class Calculator extends React.PureComponent {
     // eval() crashes the app in case of error if not wrapped within a try...catch block
     try {
       let calculation = this.state.formulaLine + this.state.display
+      // eslint-disable-next-line
       let solved = eval(calculation).toString() // eval() function evaluates JavaScript code represented as a string -- EVAL() HANDLES THE CALCULATION AND ORDER OF OPERATIONS
       this.setState({
       negativeNumberAdded: false,
