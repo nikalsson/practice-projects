@@ -21,15 +21,8 @@ class PomodoroClock extends React.PureComponent{
     };
     this.startStopTimer = this.startStopTimer.bind(this);
     this.incrementDecrement = this.incrementDecrement.bind(this);
+    this.resetTimer = this.resetTimer.bind(this);
   }
-
-  // componentDidMount(){
-  //   this.startTimer();
-  // }
-
-  // componentDidUpdate() {
-  //   this.startTimer();
-  // }
 
   // Start and stop the timer, set or remove 1000ms interval tick(), which updates mins & secs
   startStopTimer() {
@@ -48,11 +41,13 @@ class PomodoroClock extends React.PureComponent{
     }
   }
 
+  // Counts the time, updates every second if the countingDown is true
   tick() {
     if (this.state.countingDown){
       this.setState(function (prevState) {
-        // When the counter hits 00:00, toggle between Session and Break and reset the timer to that
+        // When the counter hits 00:00, toggle between Session and Break and reset the timer to the corresponding one
         if (prevState.timeLeftMinutes <= 0 && prevState.timeLeftSeconds <= 0) {
+          this.alarmBeep.play() // Play alarm sound at 00:00
           if (prevState.timerLabel === "Session") {
             return {
               timerLabel: "Break",
@@ -96,6 +91,11 @@ class PomodoroClock extends React.PureComponent{
       keyHolder = "sessionLength";
     }
 
+    // Prevent the timer length being set to <1 or >60
+    if ((this.state[[keyHolder]] === 1 && event.target.innerHTML === "-") || (this.state[[keyHolder]] === 60 && event.target.innerHTML === "+")) {
+      return
+    };
+
     // eval() is used to convert the mathematical operator + or - from string, below line is to prevent warning in console about eval()
     // eslint-disable-next-line 
     let newValue = (eval(`${this.state[[keyHolder]]} ${event.target.innerHTML} 1`))
@@ -104,12 +104,14 @@ class PomodoroClock extends React.PureComponent{
     if (this.state.timerLabel === "Session" && keyHolder === "sessionLength") {
       this.setState({
         timeLeftMinutes: newValue,
+        timeLeftSeconds: 0,
         [keyHolder]: newValue
       })
     }
     else if (this.state.timerLabel === "Break" && keyHolder === "breakLength") {
       this.setState({
         timeLeftMinutes: newValue,
+        timeLeftSeconds: 0,
         [keyHolder]: newValue
       })
     } 
@@ -118,33 +120,60 @@ class PomodoroClock extends React.PureComponent{
         [keyHolder]: newValue
       })
     }
+  }
 
+  // Reset the timer, also stop and reload alarm sound
+  resetTimer() {
+    this.alarmBeep.load()
+    this.setState({
+      breakCounter: false,
+      breakLength: 5,
+      sessionCounter: true,
+      sessionLength: 25,
+      timerLabel: "Session",
+      timeLeftMinutes: 25,
+      timeLeftSeconds: 0,
+      countingDown: false,
+      alarmPlaying: false
+    })
   }
 
   render(){
+    // Disable the buttons if the counter is running
+    let buttonsDisabled;
+    if (this.state.countingDown === true) {
+      buttonsDisabled = true;
+    } else {
+      buttonsDisabled = false;
+    }
+
     return(
       <CustomCSS>
-        <div className="background">
-          <div id="labels">
+        <div className="pomodoro-background">
+
+          <div className="labels">
             <div id="break">
-              <div id="break-label">Break length</div>
-              <div id="break-length">{this.state.breakLength}</div>
-              <button id="break-decrement" onClick={ this.incrementDecrement }>-</button>
-              <button id="break-increment" onClick={ this.incrementDecrement }>+</button>
+              <div id="break-label">Break</div>
+              <div id="break-length" className="length">{this.state.breakLength}</div>
+              <button id="break-decrement" onClick={ this.incrementDecrement } disabled={buttonsDisabled}>-</button>
+              <button id="break-increment" onClick={ this.incrementDecrement } disabled={buttonsDisabled}>+</button>
             </div>
-            <div id="timer">
+
+            <div id="session">
               <div id="session-label">Session</div>
-              <div id="session-length">{this.state.sessionLength}</div>
-              <button id="session-decrement" onClick={ this.incrementDecrement }>-</button>
-              <button id="session-increment" onClick={ this.incrementDecrement }>+</button>
+              <div id="session-length" className="length">{this.state.sessionLength}</div>
+              <button id="session-decrement" onClick={ this.incrementDecrement } disabled={buttonsDisabled}>-</button>
+              <button id="session-increment" onClick={ this.incrementDecrement } disabled={buttonsDisabled}>+</button>
             </div>
           </div>
 
-          <button id="start_stop" onClick={ this.startStopTimer }>
-            {this.state.countingDown ? "Stop" : "Start" }
-          </button>
-          <button id="reset">Reset</button> 
-          {/* : When I click the element with the id of reset, any running timer should be stopped, the value within id="break-length" should return to 5, the value within id="session-length" should return to 25, and the element with id="time-left" should reset to it's default state. */}
+          <div id="buttons">
+            <button id="start_stop" onClick={ this.startStopTimer }>
+              {this.state.countingDown ? "Stop" : "Start" }
+            </button>
+            <button id="reset" onClick={ this.resetTimer }>Reset</button>
+          </div>
+
           <div id="timer">
             <div id="timer-label">
               {this.state.timerLabel}
@@ -152,6 +181,7 @@ class PomodoroClock extends React.PureComponent{
             <div id="time-left">
               {this.state.timeLeftMinutes < 10 ? `0${this.state.timeLeftMinutes}`  : this.state.timeLeftMinutes }:{this.state.timeLeftSeconds < 10 ? `0${this.state.timeLeftSeconds}`  : this.state.timeLeftSeconds }
             </div>
+            <audio id="beep" ref={(alarmBeep) => { this.alarmBeep = alarmBeep }} src="./alarm/pager-beep.wav"/>
           </div>
         </div>
       </CustomCSS>

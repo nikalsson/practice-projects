@@ -101,8 +101,25 @@ button:active {
 }
 
 @media screen and (max-width: 600px) {
+  .background {
+    padding-top: 0 60px 0 0;
+    background-color: #fff;
+  }
+  
   .calculator-body {
-    width: 95vw;
+    width: 100vw;
     height: 95vh;
+    grid-row-gap: 0;
+    border: 0;
+  }
+
+  .button-row {
+    grid-column-gap: 0;
+  }
+
+  .button-row button{
+    border: solid 1px black;
+    border-radius: 0;
+    padding: 0;
   }
 }

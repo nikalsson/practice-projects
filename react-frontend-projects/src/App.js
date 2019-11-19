@@ -106,8 +106,6 @@ class App extends React.PureComponent {
             <PomodoroClock/>
           </React.Fragment>
         }
-        
-        
       </React.Fragment>
     )
   }

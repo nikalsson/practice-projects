@@ -31,7 +31,7 @@ export const ModeSelectorButtons = (props) => (
           <Button onClick={props.changeView} block variant="success" id="drumMachine">Drum Machine - improved version does not pass FCC tests anymore, but is shorter in code and does all the same things          </Button>
         </Col>
         <Col>
-          <Button onClick={props.changeView} block variant="primary" disabled>Here will be a pomodoro clock</Button>
+          <Button onClick={props.changeView} block variant="primary" id="pomodoroClock">Pomodoro clock</Button>
         </Col>
       </Row>
     </div>
