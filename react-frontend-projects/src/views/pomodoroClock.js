@@ -1,5 +1,7 @@
-import React from 'react'
-import styled from 'styled-components'
+import React from 'react';
+import styled from 'styled-components';
+import Button from 'react-bootstrap/Button';
+import ButtonGroup from 'react-bootstrap/ButtonGroup';
 
 // Load custom CSS with styled-components
 const CustomCSS = styled.div(require('./pomodoroClock.css'));
@@ -139,6 +141,9 @@ class PomodoroClock extends React.PureComponent{
   }
 
   render(){
+    let startStopButtonVariant;
+    this.state.countingDown ? startStopButtonVariant = "warning" : startStopButtonVariant = "success"
+    
     // Disable the buttons if the counter is running
     let buttonsDisabled;
     if (this.state.countingDown === true) {
@@ -150,38 +155,45 @@ class PomodoroClock extends React.PureComponent{
     return(
       <CustomCSS>
         <div className="pomodoro-background">
+          <div id="clock-frame">
 
-          <div className="labels">
-            <div id="break">
-              <div id="break-label">Break</div>
-              <div id="break-length" className="length">{this.state.breakLength}</div>
-              <button id="break-decrement" onClick={ this.incrementDecrement } disabled={buttonsDisabled}>-</button>
-              <button id="break-increment" onClick={ this.incrementDecrement } disabled={buttonsDisabled}>+</button>
+            <div className="labels">
+              <div id="break" className="labels-grid">
+                <div id="break-label">Break</div>
+                <div id="break-length" className="length">{this.state.breakLength}</div>
+                <ButtonGroup aria-label="break-length-buttons">
+                  <Button id="break-increment" className="pale-green" block variant="outline-success" onClick={ this.incrementDecrement } disabled={buttonsDisabled}>+</Button>
+                  <Button id="break-decrement" className="pale-blue" block variant="outline-primary" onClick={ this.incrementDecrement } disabled={buttonsDisabled}>-</Button>
+                </ButtonGroup>
+              </div>
+
+              <div id="session" className="labels-grid">
+                <div id="session-label">Session</div>
+                <div id="session-length" className="length">{this.state.sessionLength}</div>
+                <ButtonGroup aria-label="session-lenght-buttons">
+                  <Button id="session-decrement" className="pale-green" block variant="outline-success" onClick={ this.incrementDecrement } disabled={buttonsDisabled}>-</Button>
+                  <Button id="session-increment" className="pale-blue" block variant="outline-primary" onClick={ this.incrementDecrement } disabled={buttonsDisabled}>+</Button>
+                </ButtonGroup>
+              </div>
             </div>
 
-            <div id="session">
-              <div id="session-label">Session</div>
-              <div id="session-length" className="length">{this.state.sessionLength}</div>
-              <button id="session-decrement" onClick={ this.incrementDecrement } disabled={buttonsDisabled}>-</button>
-              <button id="session-increment" onClick={ this.incrementDecrement } disabled={buttonsDisabled}>+</button>
-            </div>
-          </div>
+            <ButtonGroup id="start-reset">
+              <Button id="start_stop" block variant={startStopButtonVariant}  onClick={ this.startStopTimer }>
+                {this.state.countingDown ? "Stop" : "Start" }
+              </Button>
+              <Button id="reset" block variant="danger" onClick={ this.resetTimer }>Reset</Button>
+            </ButtonGroup>
 
-          <div id="buttons">
-            <button id="start_stop" onClick={ this.startStopTimer }>
-              {this.state.countingDown ? "Stop" : "Start" }
-            </button>
-            <button id="reset" onClick={ this.resetTimer }>Reset</button>
-          </div>
+            <div id="timer">
+              <div id="timer-label">
+                {this.state.timerLabel}
+              </div>
+              <div id="time-left">
+                {this.state.timeLeftMinutes < 10 ? `0${this.state.timeLeftMinutes}`  : this.state.timeLeftMinutes }:{this.state.timeLeftSeconds < 10 ? `0${this.state.timeLeftSeconds}`  : this.state.timeLeftSeconds }
+              </div>
+              <audio id="beep" ref={(alarmBeep) => { this.alarmBeep = alarmBeep }} src="./alarm/pager-beep.wav"/>
+            </div>
 
-          <div id="timer">
-            <div id="timer-label">
-              {this.state.timerLabel}
-            </div>
-            <div id="time-left">
-              {this.state.timeLeftMinutes < 10 ? `0${this.state.timeLeftMinutes}`  : this.state.timeLeftMinutes }:{this.state.timeLeftSeconds < 10 ? `0${this.state.timeLeftSeconds}`  : this.state.timeLeftSeconds }
-            </div>
-            <audio id="beep" ref={(alarmBeep) => { this.alarmBeep = alarmBeep }} src="./alarm/pager-beep.wav"/>
           </div>
         </div>
       </CustomCSS>

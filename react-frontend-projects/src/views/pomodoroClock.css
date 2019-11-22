@@ -1,16 +1,31 @@
+body {
+  background-color: #d9d9d9;
+}
+
 .pomodoro-background {
   margin: 0;
-  padding-top: 40px;
+  padding-top: 50px;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  display: grid;
-  grid-template-rows: 3fr 2fr 3fr;
-  justify-content: center;
-  align-items: center;
   height: 100vh;
   width: 100vw;
-  background-color: #d9d9d9;
+  max-width:100%;
   text-align: center;
+  background-color: #d9d9d9;
+}
+
+#clock-frame {
+  margin: 0 auto;
+  max-width: 600px;
+  max-height: 600px;
+  display: grid;
+  grid-template-rows: 3fr 2fr auto;
+  justify-content: center;
+  align-items: center;
+}
+
+button {
+  border-radius: 0 !important;
 }
 
 .labels {
@@ -21,20 +36,21 @@
   height: 100%;
   width: 100%;
   background-color: #fff;
-
-  border: 1px solid black;
 }
 
-.labels button {
-  /* background-color: #eeeeeee8; */
-  background-color: #fff;
-  color: #000;
-  width: 4em;
-  /* width: 100%; */
-  height: 3em;
-  border: 1px solid black;
-  border-radius: 0;
-  padding: 0;
+.labels-grid {
+  width: 100%;
+  display: flex;
+  flex-direction: column; 
+}
+
+.labels .btn-group {
+  height: 100%;
+  margin: 0;
+}
+
+.btn-block+.btn-block {
+  margin: 0;
 }
 
 .labels .length {
@@ -42,14 +58,43 @@
   font-size: 1.5em;
 }
 
+#start-reset {
+  padding-top: 15px;
+}
+
+.btn-group button {
+  padding: 15px;
+}
+
+.btn-group .pale-green {
+  background-color: rgba(107, 194, 127, 0.2);
+}
+
+.btn-group .pale-blue {
+  background-color: rgba(80, 164, 255, 0.2);
+}
+
 #timer {
+  margin: 25px;
   width: 80vw;
   max-width: 400px;
-  border-radius: 10px;
+  border-radius: 100px;
   background-color: #fff;
 }
 
 #time-left {
-  font-size: 9em;
+  line-height: 90%;
+  font-size: 8em;
   font-family: calculator; /* This was imported in the calculatorStyles.css file*/
+}
+
+@media only screen and (max-width: 600px) {
+  #clock-frame {
+    max-width: 90%;
+    max-height: 95%;
+  }
+
+  .btn-group button {
+    padding: 20px;
+  }
 }
