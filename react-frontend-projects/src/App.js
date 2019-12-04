@@ -10,12 +10,12 @@ import PomodoroClock from './views/pomodoroClock'
 
 class App extends React.PureComponent {
   state = {
-    modePickerVisible: false,
+    modePickerVisible: true,
     markdownPreviewerSelected: false,
     calculatorSelected: false,
     randomQuoteMachineSelected: false,
     drumMachineSelected: false,
-    pomodoroClockSelected: true
+    pomodoroClockSelected: false
   }
 
   componentDidMount() {

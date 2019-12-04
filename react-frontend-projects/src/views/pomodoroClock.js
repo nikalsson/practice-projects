@@ -11,9 +11,7 @@ class PomodoroClock extends React.PureComponent{
     super(props);
     this.timer = null;
     this.state = {
-      breakCounter: false,
       breakLength: 5,
-      sessionCounter: true,
       sessionLength: 25,
       timerLabel: "Session",
       timeLeftMinutes: 25,
@@ -31,7 +29,7 @@ class PomodoroClock extends React.PureComponent{
     if (this.state.countingDown === false) {
       this.timer = setInterval(() => this.tick(), 1000)
       this.setState({
-        countingDown: true
+        countingDown: true,
       })
     }
 
@@ -48,7 +46,7 @@ class PomodoroClock extends React.PureComponent{
     if (this.state.countingDown){
       this.setState(function (prevState) {
         // When the counter hits 00:00, toggle between Session and Break and reset the timer to the corresponding one
-        if (prevState.timeLeftMinutes <= 0 && prevState.timeLeftSeconds <= 0) {
+        if (prevState.timeLeftMinutes === 0 && prevState.timeLeftSeconds === 0) {
           this.alarmBeep.play() // Play alarm sound at 00:00
           if (prevState.timerLabel === "Session") {
             return {
@@ -67,7 +65,7 @@ class PomodoroClock extends React.PureComponent{
         }
 
         // When seconds hit 00, reduce from minute counter and roll back seconds counter
-        else if (prevState.timeLeftSeconds <= 0) {
+        else if (prevState.timeLeftSeconds === 0) {
           return {
             timeLeftSeconds: 59,
             timeLeftMinutes: prevState.timeLeftMinutes - 1
@@ -84,7 +82,7 @@ class PomodoroClock extends React.PureComponent{
     }
   }
 
-  // Increment or decrement both the break and session counters
+  // Increment or decrement both the break and sesssion counters
   incrementDecrement(event) {
     let keyHolder;
     if (event.target.id.includes("break")){
@@ -126,17 +124,16 @@ class PomodoroClock extends React.PureComponent{
 
   // Reset the timer, also stop and reload alarm sound
   resetTimer() {
-    this.alarmBeep.load()
+    this.alarmBeep.load();
+    clearInterval(this.timer);
     this.setState({
-      breakCounter: false,
       breakLength: 5,
-      sessionCounter: true,
       sessionLength: 25,
       timerLabel: "Session",
       timeLeftMinutes: 25,
       timeLeftSeconds: 0,
       countingDown: false,
-      alarmPlaying: false
+      alarmPlaying: false,
     })
   }
 
@@ -151,6 +148,8 @@ class PomodoroClock extends React.PureComponent{
     } else {
       buttonsDisabled = false;
     }
+
+    let timeString = (this.state.timeLeftMinutes < 10 ? `0${this.state.timeLeftMinutes}:` : `${this.state.timeLeftMinutes}:`) + (this.state.timeLeftSeconds < 10 ? `0${this.state.timeLeftSeconds}` : `${this.state.timeLeftSeconds}`)
 
     return(
       <CustomCSS>
@@ -189,7 +188,8 @@ class PomodoroClock extends React.PureComponent{
                 {this.state.timerLabel}
               </div>
               <div id="time-left">
-                {this.state.timeLeftMinutes < 10 ? `0${this.state.timeLeftMinutes}`  : this.state.timeLeftMinutes }:{this.state.timeLeftSeconds < 10 ? `0${this.state.timeLeftSeconds}`  : this.state.timeLeftSeconds }
+                {timeString}
+                {/* {this.state.timeLeftMinutes < 10 ? `0${this.state.timeLeftMinutes}` : this.state.timeLeftMinutes }:{this.state.timeLeftSeconds < 10 ? `0${this.state.timeLeftSeconds}` : this.state.timeLeftSeconds } */}
               </div>
               <audio id="beep" ref={(alarmBeep) => { this.alarmBeep = alarmBeep }} src="./alarm/pager-beep.wav"/>
             </div>
@@ -199,7 +199,6 @@ class PomodoroClock extends React.PureComponent{
       </CustomCSS>
     )
   }
-
 }
 
 export default PomodoroClock;
