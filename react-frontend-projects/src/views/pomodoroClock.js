@@ -4,7 +4,7 @@ import Button from 'react-bootstrap/Button';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
 
 // Load custom CSS with styled-components
-const CustomCSS = styled.div(require('./pomodoroClock.css'));
+const CustomCSS = styled.div(require('../stylesheets/pomodoroClock.css'));
 
 class PomodoroClock extends React.PureComponent{
   constructor(props) {

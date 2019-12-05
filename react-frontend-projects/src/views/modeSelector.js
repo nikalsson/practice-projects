@@ -3,7 +3,7 @@ import styled from 'styled-components' // styled-components module for easier CS
 import { Row, Col, Button } from 'react-bootstrap'
 
 // Load the CSS using styled-components
-const CustomCSS = styled.div(require('./modeSelector.css'))
+const CustomCSS = styled.div(require('../stylesheets/modeSelector.css'))
 
 // Selection buttons on the landing page 
 export const ModeSelectorButtons = (props) => (

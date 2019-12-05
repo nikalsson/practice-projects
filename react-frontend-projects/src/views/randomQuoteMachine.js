@@ -4,7 +4,7 @@ import { faTwitter } from '@fortawesome/free-brands-svg-icons' // Import Twitter
 import styled from 'styled-components' // styled-components module for easier CSS
 
 // Load the CSS using styled-components
-const CustomCSS = styled.div(require('./randomQuoteMachine.css'))
+const CustomCSS = styled.div(require('../stylesheets/randomQuoteMachine.css'))
 
 class QuoteMachine extends React.PureComponent {
 

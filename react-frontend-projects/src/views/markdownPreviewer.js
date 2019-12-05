@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components' // styled-components module for easier CSS
 
 // Load the CSS using styled-components
-const CustomCSS = styled.div(require('./markdownPreviewer.css'))
+const CustomCSS = styled.div(require('../stylesheets/markdownPreviewer.css'))
 
 // Require marked.js, a low-level markdown compiler and set it to recognize line breaks
 const marked = require('marked');

@@ -1,5 +1,5 @@
 import React from 'react';
-import './index.css'; // Import stylesheet
+import './stylesheets/index.css'; // Import stylesheet
 import 'bootstrap/dist/css/bootstrap.min.css'; // Import bootstrap stylesheet
 import { ModeSelectorButtons, ReturnButton } from './views/modeSelector' 
 import MarkdownPreviewer from './views/markdownPreviewer'
@@ -19,7 +19,8 @@ class App extends React.PureComponent {
   }
 
   componentDidMount() {
-    window.focus()
+    window.scrollTo(0,1);
+    window.focus();
   }
 
   changeView = (event) => {

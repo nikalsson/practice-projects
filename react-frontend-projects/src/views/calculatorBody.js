@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components' // styled-components module for easier CSS
 
 // Load the CSS using styled-components
-const CustomCSS = styled.div(require('./calculatorStyles.css'))
+const CustomCSS = styled.div(require('../stylesheets/calculatorStyles.css'))
 
 // Set the layout of the calculator
 export const CalculatorBody = ({ state, receiveNumberPress, receiveOperationPress, solveEquation, clearDisplay }) => {

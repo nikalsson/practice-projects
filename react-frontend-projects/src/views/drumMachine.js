@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components' // styled-components module for easier CSS
 
 // Load the CSS using styled-components
-const CustomCSS = styled.div(require('./drumMachine.css'))
+const CustomCSS = styled.div(require('../stylesheets/drumMachine.css'))
 
 const keyCodesDrumHits = {
 	1: {keyCode: 81, letter: "Q", file: "hihat-808.wav"},
